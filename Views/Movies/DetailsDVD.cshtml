@@ -73,20 +73,10 @@
                 <div class="col-md-12">
                     <div class="card-footer">
                         <p class="card-text">
-                            <a class="btn btn-outline-primary float-right" asp-action="Index">
+                            <a class="btn btn-outline-primary float-right" asp-action="IndexDVD">
                                 Back to List
                             </a>
-                            <a class="btn btn-success text-white @(DateTime.Now > Model.EndDate ? "disabled" : "")" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id">
-
-                                @if (DateTime.Now > Model.EndDate)
-                                {
-                                    <span>unavailable</span> 
-                                }
-                                else if (DateTime.Now < Model.EndDate){
-                                    <i class="bi bi-cart-plus"></i>
-                                   <span>Add to Cart (Price @Model.Price.ToString("c")</span>
-                                 }
-                            </a>
+                            <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddItemToDVDCart" asp-route-id="@Model.Id"><i class="bi bi-cart-plus"></i> Buy DVD (Price @Model.Price.ToString("c"))</a>
                         </p>
                     </div>
                 </div>
