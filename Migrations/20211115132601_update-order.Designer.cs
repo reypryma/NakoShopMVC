@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NakoShopMVC.Data;
 
 namespace NakoShopMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211115132601_update-order")]
+    partial class updateorder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,29 +83,6 @@ namespace NakoShopMVC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cinemas");
-                });
-
-            modelBuilder.Entity("NakoShopMVC.Models.DVDCartItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DVDCartId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MovieId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("DVDCartItems");
                 });
 
             modelBuilder.Entity("NakoShopMVC.Models.Movie", b =>
@@ -261,15 +240,6 @@ namespace NakoShopMVC.Migrations
                         .IsRequired();
 
                     b.Navigation("Actor");
-
-                    b.Navigation("Movie");
-                });
-
-            modelBuilder.Entity("NakoShopMVC.Models.DVDCartItem", b =>
-                {
-                    b.HasOne("NakoShopMVC.Models.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId");
 
                     b.Navigation("Movie");
                 });

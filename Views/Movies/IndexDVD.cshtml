@@ -54,17 +54,7 @@
                                 <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.Id">
                                     <i class="bi bi-eye-fill"></i> Show Details
                                 </a>
-                                <a class="btn btn-success text-white @(DateTime.Now > item.EndDate ? "disabled" : "")" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Id">
-                                    <i class="bi bi-cart-plus"></i>
-                                    @if (DateTime.Now > item.EndDate)
-                                    {
-                                <span>unavailable</span> }
-                                                else if (DateTime.Now < item.EndDate)
-                                                {
-                                <i class="bi bi-cart-plus"></i>
-                                                    <span>Add to Cart (Price @item.Price.ToString("c")</span>}
-
-                                </a>
+                                <a class="btn btn-info text-white" asp-controller="Orders" asp-action="AddItemToDVDCart" asp-route-id="@item.Id"><i class="bi bi-cart-plus"></i> Buy DVD (Price @item.Price.ToString("c"))</a>
                             </p>
                         </div>
                     </div>

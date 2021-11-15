@@ -10,8 +10,8 @@ using NakoShopMVC.Data;
 namespace NakoShopMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211114095449_Order_and_OrderItem_Added")]
-    partial class Order_and_OrderItem_Added
+    [Migration("20211115151759_add-dvd-carts")]
+    partial class adddvdcarts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,6 +85,29 @@ namespace NakoShopMVC.Migrations
                     b.ToTable("Cinemas");
                 });
 
+            modelBuilder.Entity("NakoShopMVC.Models.DVDCartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DVDCartId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MovieId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("DVDCartItems");
+                });
+
             modelBuilder.Entity("NakoShopMVC.Models.Movie", b =>
                 {
                     b.Property<int>("Id")
@@ -136,6 +159,9 @@ namespace NakoShopMVC.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
@@ -237,6 +263,15 @@ namespace NakoShopMVC.Migrations
                         .IsRequired();
 
                     b.Navigation("Actor");
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("NakoShopMVC.Models.DVDCartItem", b =>
+                {
+                    b.HasOne("NakoShopMVC.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId");
 
                     b.Navigation("Movie");
                 });

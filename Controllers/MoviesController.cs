@@ -22,13 +22,22 @@ namespace NakoShopMVC.Controllers
             return View(allMovies);
         }
 
+        public async Task<IActionResult> IndexDVD()
+        {
+            var allMovies = await _service.GetAllAsync(n => n.Cinema);
+            return View(allMovies);
+        }
+
         public async Task<IActionResult> Filter(string searchString)
         {
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                var filteredResult = allMovies.Where(n => n.Name.Contains(searchString) || n.Description.Contains(searchString)).ToList();
+                var filteredResult = allMovies.Where(n => n.Name.Contains(searchString, System.StringComparison.CurrentCultureIgnoreCase) || n.Description.Contains(searchString, System.StringComparison.CurrentCultureIgnoreCase)).ToList();
+
+                var newFilteredResult = allMovies.Where(n => string.Equals(n.Name, searchString, System.StringComparison.CurrentCultureIgnoreCase) || string.Equals(n.Description, (searchString), System.StringComparison.CurrentCultureIgnoreCase)).ToList();
+
                 return View("Index", filteredResult);
             }
 
@@ -37,6 +46,12 @@ namespace NakoShopMVC.Controllers
 
         //GET: Movies/Details/1
         public async Task<IActionResult> Details(int id)
+        {
+            var movieDetail = await _service.GetMovieByIdAsync(id);
+            return View(movieDetail);
+        }
+
+        public async Task<IActionResult> DetailsDVD(int id)
         {
             var movieDetail = await _service.GetMovieByIdAsync(id);
             return View(movieDetail);

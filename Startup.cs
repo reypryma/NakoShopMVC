@@ -41,6 +41,7 @@ namespace NakoShopMVC
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+            services.AddScoped(sc => DVDCart.GetDVDCart(sc));
 
             services.AddSession();
 

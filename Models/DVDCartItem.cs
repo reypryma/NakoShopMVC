@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace NakoShopMVC.Models
 {
-    public class Order
+    public class DVDCartItem
     {
         [Key]
         public int Id { get; set; }
 
-        public string Email { get; set; }
-        public string UserId { get; set; }
+        public Movie Movie { get; set; }
+        public int Amount { get; set; }
 
-        public string OrderType { get; set; }
 
-        public List<OrderItem> OrderItems { get; set; }
+        public string DVDCartId { get; set; }
     }
 }
