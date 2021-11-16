@@ -1,0 +1,6 @@
+# NakoShopMVC
+Nako Cinematoplay with MVC architecture
+
+How to Use :
+1. Set "DefaultConnectionString" to your data source
+2. run update-database in visual studio package manager console
